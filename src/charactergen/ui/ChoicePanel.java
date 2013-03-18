@@ -8,6 +8,8 @@ import charactergen.Character;
 import charactergen.classes.BaseClass;
 import charactergen.generators.BaseGenerator;
 import charactergen.races.BaseRace;
+import charactergen.settings.BaseSetting;
+import charactergen.settings.DnD4e;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -31,17 +33,21 @@ public class ChoicePanel extends JPanel {
     private JComboBox _generatorBox;
     private JComboBox _classBox;
     private JComboBox _raceBox;
+    private JComboBox _settingsBox;
     private JSpinner _levelSpinner;
     private ActionListener _raceListener;
     private ActionListener _classListener;
+    private ActionListener _generatorListener;
     private JButton _classLock;
     private JButton _raceLock;
     private boolean _classLocked;
     private boolean _raceLocked;
+    private BaseSetting _setting;
     private final String SEPARATOR = "------------";
 
     public ChoicePanel(Character c) {
         _character = c;
+        _setting = new DnD4e();
         _classLocked = false;
         _raceLocked = false;
         loadPanel();
@@ -50,18 +56,23 @@ public class ChoicePanel extends JPanel {
     }
 
     private void loadPanel() {
+        Vector<String> settings = new Vector<>();
+        for (BaseSetting bs : BaseSetting.SETTINGS) {
+            settings.add(bs.getName());
+        }
         Vector<String> generators = new Vector<>();
-        for (BaseGenerator g : Character.GENERATORS) {
-            generators.add(g.getName());
+        for(BaseGenerator bg : _setting.getGenerators()){
+            generators.add(bg.getName());
         }
         Vector<String> classes = new Vector<>();
-        for (BaseClass c : Character.CLASSES) {
-            classes.add(c.getName());
+        for(BaseClass bc : _setting.getClasses()){
+            classes.add(bc.getName());
         }
         Vector<String> races = new Vector<>();
-        for (BaseRace r : Character.RACES) {
-            races.add(r.getName());
+        for(BaseRace br : _setting.getRaces()){
+            races.add(br.getName());
         }
+        _settingsBox = new JComboBox(settings);
         _generatorBox = new JComboBox(generators);
         _classBox = new JComboBox(classes);
         _raceBox = new JComboBox(races);
@@ -69,18 +80,19 @@ public class ChoicePanel extends JPanel {
     }
 
     private void setupPanel() {
+
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
 
+        JLabel settingLabel = new JLabel("Setting: ");
         JLabel editionLabel = new JLabel("Roll Type: ");
         JLabel classLabel = new JLabel("Class: ");
         JLabel raceLabel = new JLabel("Race: ");
         JLabel levelLabel = new JLabel("Level: ");
 
-        JLabel placeholderOne = new JLabel("");
-        JLabel placeholderTwo = new JLabel("");
+        JLabel placeholder = new JLabel("");
 
         _classLock = new JButton("Lock");
         _raceLock = new JButton("Lock");
@@ -89,9 +101,14 @@ public class ChoicePanel extends JPanel {
                 layout.createSequentialGroup()
                 .addGroup(
                 layout.createParallelGroup()
+                .addComponent(settingLabel)
+                .addComponent(_settingsBox)
+                .addComponent(placeholder))
+                .addGroup(
+                layout.createParallelGroup()
                 .addComponent(editionLabel)
                 .addComponent(_generatorBox)
-                .addComponent(placeholderOne))
+                .addComponent(placeholder))
                 .addGroup(
                 layout.createParallelGroup()
                 .addComponent(classLabel)
@@ -106,35 +123,82 @@ public class ChoicePanel extends JPanel {
                 layout.createParallelGroup()
                 .addComponent(levelLabel)
                 .addComponent(_levelSpinner)
-                .addComponent(placeholderTwo)));
+                .addComponent(placeholder)));
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
                 .addGroup(
                 layout.createParallelGroup()
+                .addComponent(settingLabel)
                 .addComponent(editionLabel)
                 .addComponent(classLabel)
                 .addComponent(raceLabel)
                 .addComponent(levelLabel))
                 .addGroup(
                 layout.createParallelGroup()
+                .addComponent(_settingsBox)
                 .addComponent(_generatorBox)
                 .addComponent(_classBox)
                 .addComponent(_raceBox)
                 .addComponent(_levelSpinner))
                 .addGroup(
                 layout.createParallelGroup()
-                .addComponent(placeholderOne)
+                .addComponent(placeholder)
+                .addComponent(placeholder)
                 .addComponent(_classLock)
                 .addComponent(_raceLock)
-                .addComponent(placeholderTwo)));
+                .addComponent(placeholder)));
     }
 
     private void attachListeners() {
+        _settingsBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object index = _settingsBox.getSelectedItem();
+                for (BaseSetting bs : BaseSetting.SETTINGS) {
+                    if (bs.getName().equals(index.toString())) {
+                        _setting = bs;
+                    }
+                }
+                _generatorBox.removeActionListener(_generatorListener);
+                _generatorBox.removeAllItems();
+                for (BaseGenerator bg : _setting.getGenerators()) {
+                    _generatorBox.addItem(bg.getName());
+                }
+                _generatorBox.addActionListener(_generatorListener);
+
+                _classBox.removeActionListener(_classListener);
+                _classBox.removeAllItems();
+                for (BaseClass bc : _setting.getClasses()) {
+                    _classBox.addItem(bc.getName());
+                }
+                _classBox.addActionListener(_classListener);
+
+                _raceBox.removeActionListener(_raceListener);
+                _raceBox.removeAllItems();
+                for (BaseRace br : _setting.getRaces()) {
+                    _raceBox.addItem(br.getName());
+                }
+                _raceBox.addActionListener(_raceListener);
+            }
+        });
+
+        _generatorListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                Object index = _generatorBox.getSelectedItem();
+                for (BaseGenerator bg : _setting.getGenerators()) {
+                    if (bg.getName().equals(index.toString())) {
+                        _character.setGenerator(bg);
+                    }
+                }
+            }
+        };
+
         _raceListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 Object index = _raceBox.getSelectedItem();
-                for (BaseRace br : Character.RACES) {
+                for (BaseRace br : _setting.getRaces()) {
                     if (br.getName().equals(index.toString())) {
                         _character.setRace(br);
                     }
@@ -147,7 +211,7 @@ public class ChoicePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 Object index = _classBox.getSelectedItem();
-                for (BaseClass bc : Character.CLASSES) {
+                for (BaseClass bc : _setting.getClasses()) {
                     if (bc.getName().equals(index.toString())) {
                         _character.setClass(bc);
                     }
@@ -156,6 +220,7 @@ public class ChoicePanel extends JPanel {
             }
         };
 
+        _generatorBox.addActionListener(_generatorListener);
         _classBox.addActionListener(_classListener);
         _raceBox.addActionListener(_raceListener);
 
@@ -184,14 +249,6 @@ public class ChoicePanel extends JPanel {
             }
         });
 
-        _generatorBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                int index = _generatorBox.getSelectedIndex();
-                BaseGenerator g = Character.GENERATORS[index];
-                _character.setGenerator(g);
-            }
-        });
         _levelSpinner.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent ce) {

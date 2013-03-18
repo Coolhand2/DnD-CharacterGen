@@ -8,14 +8,9 @@ package charactergen.generators;
  *
  * @author mike
  */
-public class BaseGenerator {
+public abstract class BaseGenerator {
 
-    public String getName() {
-        return "BaseGenerator";
-    }
+    public abstract String getName();
 
-    public int[] getAttributes() {
-        int[] local = {0, 0, 0, 0, 0, 0};
-        return local;
-    }
+    public abstract int[] getAttributes();
 }

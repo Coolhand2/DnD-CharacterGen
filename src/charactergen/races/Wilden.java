@@ -1,12 +1,12 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Wilden extends BaseRace {
 
-    private int _i = 0;
-
     public Wilden(int i) {
-        super(4, i);
-        _i = i;
+        setBonuses(Attributes.WIS, i);
+        setAttribute(i);
     }
 
     /**
@@ -15,6 +15,6 @@ public class Wilden extends BaseRace {
      */
     @Override
     public String getName() {
-        return "Wilden (" + super.getAttributeName(_i) + ")";
+        return "Wilden (" + getAttributeName() + ")";
     }
 }

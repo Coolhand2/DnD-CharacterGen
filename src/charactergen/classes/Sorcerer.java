@@ -1,15 +1,12 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class Sorcerer extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {2, 1, 3, 4, 5, 0};
-        return local;
+    public Sorcerer() {
+        setRanks(Arrays.asList(2, 1, 3, 4, 5, 0));
+        setHealth(12);
     }
 
     /**
@@ -19,16 +16,6 @@ public class Sorcerer extends BaseClass {
     @Override
     public String getName() {
         return "Sorcerer";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {5, 1, 0};
-        return local;
     }
 
     /**

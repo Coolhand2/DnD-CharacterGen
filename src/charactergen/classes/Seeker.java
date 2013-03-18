@@ -1,15 +1,12 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class Seeker extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {1, 2, 3, 4, 0, 5};
-        return local;
+    public Seeker() {
+        setRanks(Arrays.asList(1, 2, 3, 4, 0, 5));
+        setHealth(12);
     }
 
     /**
@@ -19,16 +16,6 @@ public class Seeker extends BaseClass {
     @Override
     public String getName() {
         return "Seeker";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {4, 0, 1};
-        return local;
     }
 
     /**

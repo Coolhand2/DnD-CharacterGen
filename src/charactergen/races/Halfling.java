@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Halfling extends BaseRace {
 
     public Halfling() {
-        super(1, 5);
+        setBonuses(Attributes.DEX, Attributes.CHA);
     }
 
     /**

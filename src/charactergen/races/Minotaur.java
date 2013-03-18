@@ -1,12 +1,12 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Minotaur extends BaseRace {
 
-    private int _i = 0;
-
     public Minotaur(int i) {
-        super(0, i);
-        _i = i;
+        setBonuses(Attributes.STR, i);
+        setAttribute(i);
     }
 
     /**
@@ -15,6 +15,6 @@ public class Minotaur extends BaseRace {
      */
     @Override
     public String getName() {
-        return "Minotaur (" + super.getAttributeName(_i) + ")";
+        return "Minotaur (" + _attribute + ")";
     }
 }

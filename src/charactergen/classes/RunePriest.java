@@ -1,15 +1,12 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class RunePriest extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {0, 3, 1, 4, 2, 5};
-        return local;
+    public RunePriest() {
+        setRanks(Arrays.asList(3, 1, 2, 4, 0, 5));
+        setHealth(12);
     }
 
     /**
@@ -19,16 +16,6 @@ public class RunePriest extends BaseClass {
     @Override
     public String getName() {
         return "Runepriest";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {0, 2, 4};
-        return local;
     }
 
     /**

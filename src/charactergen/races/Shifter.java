@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Shifter extends BaseRace {
 
     public Shifter() {
-        super(0, 4);
+        setBonuses(Attributes.STR, Attributes.WIS);
     }
 
     /**

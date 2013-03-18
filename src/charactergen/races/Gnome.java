@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Gnome extends BaseRace {
 
     public Gnome() {
-        super(3, 5);
+        setBonuses(Attributes.INT, Attributes.CHA);
     }
 
     /**

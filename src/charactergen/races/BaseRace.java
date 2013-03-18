@@ -1,41 +1,41 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package charactergen.races;
 
-public class BaseRace {
+import charactergen.Attributes;
+import java.util.Vector;
 
-    protected int[] _bonuses = {0, 0, 0, 0, 0, 0};
+/**
+ *
+ * @author Mike
+ */
+public abstract class BaseRace {
 
-    public BaseRace(int i) {
-        _bonuses[i] = 2;
-    }
+    protected Vector<Integer> _bonuses = new Vector<Integer>();
+    protected String _attribute = "";
 
-    public BaseRace(int i, int j) {
-        _bonuses[i] = 2;
-        _bonuses[j] = 2;
-    }
-
-    public int[] getBonuses() {
+    public Vector<Integer> getBonuses() {
         return _bonuses;
     }
 
-    public String getName() {
-        return "Base Race";
+    public void setBonuses(int a, int b) {
+        _bonuses.add(a);
+        _bonuses.add(b);
     }
 
-    public String getAttributeName(int i) {
-        switch (i) {
-            case 0:
-                return "STR";
-            case 1:
-                return "DEX";
-            case 2:
-                return "CON";
-            case 3:
-                return "INT";
-            case 4:
-                return "WIS";
-            case 5:
-                return "CHA";
-        }
-        return "BAD";
+    public void setBonuses(int a) {
+        _bonuses.add(a);
     }
+
+    public void setAttribute(int i) {
+        _attribute = Attributes.getAttributeName(i);
+    }
+
+    public String getAttributeName() {
+        return _attribute;
+    }
+
+    public abstract String getName();
 }

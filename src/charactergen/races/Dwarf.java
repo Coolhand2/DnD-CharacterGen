@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Dwarf extends BaseRace {
 
     public Dwarf() {
-        super(2, 4);
+        setBonuses(Attributes.CON, Attributes.WIS);
     }
 
     /**

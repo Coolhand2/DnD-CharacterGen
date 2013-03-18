@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Goliath extends BaseRace {
 
     public Goliath() {
-        super(0, 2);
+        setBonuses(Attributes.STR, Attributes.CON);
     }
 
     /**

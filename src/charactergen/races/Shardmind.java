@@ -1,12 +1,12 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Shardmind extends BaseRace {
 
-    private int _i = 0;
-
     public Shardmind(int i) {
-        super(3, i);
-        _i = i;
+        setBonuses(Attributes.INT, i);
+        setAttribute(i);
     }
 
     /**
@@ -15,6 +15,6 @@ public class Shardmind extends BaseRace {
      */
     @Override
     public String getName() {
-        return "Shardmind (" + super.getAttributeName(_i) + ")";
+        return "Shardmind (" + _attribute + ")";
     }
 }

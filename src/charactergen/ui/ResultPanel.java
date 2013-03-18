@@ -121,8 +121,7 @@ public class ResultPanel extends JPanel {
                 .addGroup(
                 layout.createParallelGroup()
                 .addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                );
+                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setHorizontalGroup(
                 layout.createParallelGroup()
                 .addGroup(

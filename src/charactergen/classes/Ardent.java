@@ -1,15 +1,12 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class Ardent extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {3,4,1,5,2,0};
-        return local;
+    public Ardent() {
+        setRanks(Arrays.asList(4, 1, 3, 2, 0, 5));
+        setHealth(12);
     }
 
     /**
@@ -19,16 +16,6 @@ public class Ardent extends BaseClass {
     @Override
     public String getName() {
         return "Ardent";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {5, 2, 4};
-        return local;
     }
 
     /**

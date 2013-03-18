@@ -1,15 +1,12 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class Wizard extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {4, 2, 3, 0, 1, 5};
-        return local;
+    public Wizard() {
+        setRanks(Arrays.asList(4, 2, 3, 0, 1, 5));
+        setHealth(10);
     }
 
     /**
@@ -19,16 +16,6 @@ public class Wizard extends BaseClass {
     @Override
     public String getName() {
         return "Wizard";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {3, 4, 1};
-        return local;
     }
 
     /**

@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Deva extends BaseRace {
 
     public Deva() {
-        super(3, 4);
+        setBonuses(Attributes.INT, Attributes.WIS);
     }
 
     /**

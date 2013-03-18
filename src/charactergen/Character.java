@@ -7,6 +7,7 @@ package charactergen;
 import charactergen.classes.*;
 import charactergen.generators.*;
 import charactergen.races.*;
+import charactergen.settings.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,25 +28,7 @@ public class Character {
     private int _level;
     private int _health;
     private Vector<ClassMap> _classMap;
-    public static final BaseClass[] CLASSES = {
-        new Ardent(), new Avenger(), new Barbarian(), new Bard(),
-        new Battlemind(), new Cleric(), new Druid(), new Fighter(),
-        new Invoker(), new Monk(), new Paladin(), new Psion(), new Ranger(),
-        new Rogue(), new RunePriest(), new Seeker(), new Shaman(),
-        new Sorcerer(), new Warden(), new Warlock(), new Warlord(), new Wizard()
-    };
-    public static final BaseRace[] RACES = {
-        new Deva(), new Dragonborn(), new Dwarf(), new Eladrin(), new Elf(),
-        new Githzerai(1), new Githzerai(3), new Gnome(), new Goliath(),
-        new HalfElf(), new HalfOrc(), new Halfling(), new Human(0), new Human(1),
-        new Human(2), new Human(3), new Human(4), new Human(5), new Minotaur(2),
-        new Minotaur(4), new Shardmind(4), new Shardmind(5), new Shifter(),
-        new Tiefling(), new Wilden(2), new Wilden(1)
-    };
-    public static final BaseGenerator[] GENERATORS = {
-        new NormalSpread(), new SpecialSpread(), new DualSpecSpread(),
-        new NormalRoll(), new PowerRoll()
-    };
+    private BaseSetting _setting;
 
     public Character() {
         _level = 1;
@@ -55,17 +38,19 @@ public class Character {
         _race = new Deva();
         _class = new Ardent();
         _classMap = new Vector<>();
+        _setting = new DnD4e();
 
         BaseGenerator g = new SpecialSpread();
-        for (BaseClass bc : CLASSES) {
-            for (BaseRace br : RACES) {
+        for (BaseClass bc : _setting.getClasses()) {
+            for (BaseRace br : _setting.getRaces()) {
                 int[] attributes = g.getAttributes();
-                int[] bonuses = br.getBonuses();
-                int[] ranks = bc.getRanks();
-                int[] preferred = bc.getPreferred();
+                Vector<Integer> bonuses = br.getBonuses();
+                Vector<Integer> ranks = bc.getRanks();
+                Vector<Integer> preferred = bc.getPreferred();
                 int[] sums = {0, 0, 0, 0, 0, 0};
                 for (int i = 0; i < 6; i++) {
-                    sums[i] += attributes[ranks[i]] + bonuses[i];
+                    sums[i] += (bonuses.contains(i)) ? 2 : 0;
+                    sums[i] += attributes[ranks.elementAt(i)];
                 }
                 float average = 0;
                 for (int index : preferred) {
@@ -96,15 +81,19 @@ public class Character {
 
     public void generateAttributes() {
         int[] attributes = _generator.getAttributes();
-        int[] bonuses = _race.getBonuses();
-        int[] ranks = _class.getRanks();
-        int[] preferred = _class.getPreferred();
+        Vector<Integer> bonuses = _race.getBonuses();
+        Vector<Integer> ranks = _class.getRanks();
+        Vector<Integer> preferred = _class.getPreferred();
         int[] sums = {0, 0, 0, 0, 0, 0};
         for (int i = 0; i < 6; i++) {
-            sums[i] += attributes[ranks[i]] + bonuses[i];
+            sums[i] += (bonuses.contains(i)) ? 2 : 0;
+            sums[i] += attributes[ranks.elementAt(i)];
         }
-        _health = sums[2];
+        _health = attributes[Attributes.CON] + _class.getBaseHealth();
         for (int i = 0; i < _level; i++) {
+            if(i > 1){
+                _health += _class.getLevelHealth();
+            }
             switch (i) {
                 case 4:
                 case 8:
@@ -112,17 +101,20 @@ public class Character {
                 case 18:
                 case 24:
                 case 28:
-                    sums[preferred[0]]++;
-                    sums[preferred[1]]++;
+                    if( preferred.contains(Attributes.CON)){
+                        _health++;
+                    }
+                    sums[preferred.elementAt(0)]++;
+                    sums[preferred.elementAt(1)]++;
                     break;
                 case 11:
                 case 21:
                     for (int k = 0; k < 6; k++) {
                         sums[k]++;
                     }
+                    _health++;
                     break;
             }
-            _health += ((sums[2] - 10)/2);
         }
         _attributes.setAll(sums);
         notifyListeners();
@@ -179,13 +171,13 @@ public class Character {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String description = "";
         description += _class.getName() + " " + _race.getName();
-        description += " level " + _level + " health " + _health;
-        description += " bloodied " + _health/2 + " healing surge " + _health/4;
-        description += " melee " + ((_level/2) + _attributes.getMod(Attributes.STR));
-        description += " ranged " + ((_level/2) + _attributes.getMod(Attributes.DEX));
+        description += " level(" + _level + ") health(" + _health + ")";
+        description += " bloodied(" + _health / 2 + ") healing surge(" + _health / 4 + ")";
+        description += " melee(" + ((_level / 2) + _attributes.getMod(Attributes.STR)) + ")";
+        description += " ranged(" + ((_level / 2) + _attributes.getMod(Attributes.DEX)) + ")";
 
         return description;
     }

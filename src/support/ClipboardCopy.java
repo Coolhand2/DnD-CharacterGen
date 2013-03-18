@@ -15,15 +15,15 @@ import java.awt.datatransfer.Transferable;
  * @author Mike
  */
 public class ClipboardCopy implements ClipboardOwner {
+
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         //Do Nothing.
     }
 
-    public void toClipboard(String text){
-                StringSelection ss = new StringSelection(text);
-                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                clipboard.setContents(ss, this);
+    public void toClipboard(String text) {
+        StringSelection ss = new StringSelection(text);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(ss, this);
     }
-
 }

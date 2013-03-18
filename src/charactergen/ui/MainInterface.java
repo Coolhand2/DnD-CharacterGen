@@ -6,6 +6,7 @@ package charactergen.ui;
 
 import charactergen.Character;
 import java.awt.Container;
+import java.awt.Dimension;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,6 +31,8 @@ public class MainInterface extends JFrame {
     private void setupFrame() {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Character Generator");
+        Dimension d = new Dimension(640, 480);
+        setMinimumSize(d);
     }
 
     private void loadFrame() {

@@ -1,15 +1,12 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class Shaman extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {3, 4, 1, 2, 0, 5};
-        return local;
+    public Shaman() {
+        setRanks(Arrays.asList(3, 4, 1, 2, 0, 5));
+        setHealth(12);
     }
 
     /**
@@ -19,16 +16,6 @@ public class Shaman extends BaseClass {
     @Override
     public String getName() {
         return "Shaman";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {4, 2, 3};
-        return local;
     }
 
     /**

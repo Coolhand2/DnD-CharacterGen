@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Tiefling extends BaseRace {
 
     public Tiefling() {
-        super(0, 5);
+        setBonuses(Attributes.STR, Attributes.CHA);
     }
 
     /**

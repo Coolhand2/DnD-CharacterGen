@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class HalfOrc extends BaseRace {
 
     public HalfOrc() {
-        super(0, 1);
+        setBonuses(Attributes.STR, Attributes.DEX);
     }
 
     /**

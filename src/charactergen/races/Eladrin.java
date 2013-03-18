@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Eladrin extends BaseRace {
 
     public Eladrin() {
-        super(1, 3);
+        setBonuses(Attributes.DEX, Attributes.INT);
     }
 
     /**

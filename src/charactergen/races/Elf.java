@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Elf extends BaseRace {
 
     public Elf() {
-        super(1, 4);
+        setBonuses(Attributes.DEX, Attributes.INT);
     }
 
     /**

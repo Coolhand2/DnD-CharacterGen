@@ -2,11 +2,9 @@ package charactergen.races;
 
 public class Human extends BaseRace {
 
-    private int _i = 0;
-
     public Human(int i) {
-        super(i);
-        _i = i;
+        setBonuses(i);
+        setAttribute(i);
     }
 
     /**
@@ -15,6 +13,6 @@ public class Human extends BaseRace {
      */
     @Override
     public String getName() {
-        return "Human (" + super.getAttributeName(_i) + ")";
+        return "Human (" + _attribute + ")";
     }
 }

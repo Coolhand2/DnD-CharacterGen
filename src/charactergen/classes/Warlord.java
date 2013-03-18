@@ -1,15 +1,12 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class Warlord extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {0, 4, 3, 1, 5, 2};
-        return local;
+    public Warlord() {
+        setRanks(Arrays.asList(0, 4, 3, 1, 5, 2));
+        setHealth(12);
     }
 
     /**
@@ -19,16 +16,6 @@ public class Warlord extends BaseClass {
     @Override
     public String getName() {
         return "Warlord";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {0, 3, 5};
-        return local;
     }
 
     /**

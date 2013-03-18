@@ -1,27 +1,49 @@
 package charactergen.classes;
 
-public class BaseClass {
+import charactergen.Attributes;
+import java.util.List;
+import java.util.Vector;
 
-    protected int[] _ranks = {0, 0, 0, 0, 0, 0};
-    protected int[] _preferred = {0, 1, 2};
+public abstract class BaseClass {
 
-    public BaseClass(){
+    private Vector<Integer> _ranks = new Vector<>();
+    private Vector<Integer> _preferred = new Vector<>();
+    private int _baseHealth = 0;
+    protected int _levelHealth = 0;
 
+    protected void setHealth(int i){
+        _baseHealth = i;
+        _levelHealth = (i/2) - 1;
     }
 
-    public int[] getRanks() {
+    public Vector<Integer> getRanks() {
         return _ranks;
     }
 
-    public String getName() {
-        return "BaseClass";
-    }
-
-    public int[] getPreferred() {
+    public Vector<Integer> getPreferred() {
         return _preferred;
     }
 
-    public String getRole() {
-        return "Role";
+    protected void setRanks(List<Integer> ranks) {
+        _ranks = new Vector<>(ranks);
+        setPreferred();
+    }
+
+    private void setPreferred() {
+        for (int i = 0; i < 3; i++) {
+            _preferred.add(_ranks.indexOf(i));
+        }
+    }
+
+    public abstract String getName();
+
+    public abstract String getRole();
+
+    public int getBaseHealth() {
+        return _baseHealth;
+    }
+
+    public int getLevelHealth() {
+        return _levelHealth;
     }
 }

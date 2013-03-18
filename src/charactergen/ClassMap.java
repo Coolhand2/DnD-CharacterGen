@@ -12,26 +12,26 @@ import charactergen.races.BaseRace;
  * @author Mike
  */
 public class ClassMap {
+
     private BaseClass _class;
     private BaseRace _race;
     private long _average;
 
-    public ClassMap(BaseClass bc, BaseRace br, long avg){
+    public ClassMap(BaseClass bc, BaseRace br, long avg) {
         _class = bc;
         _race = br;
         _average = avg;
     }
 
-    public double getAverage(){
+    public double getAverage() {
         return _average;
     }
 
-    public BaseClass getClassType(){
+    public BaseClass getClassType() {
         return _class;
     }
 
-    public BaseRace getRace(){
+    public BaseRace getRace() {
         return _race;
     }
-
 }

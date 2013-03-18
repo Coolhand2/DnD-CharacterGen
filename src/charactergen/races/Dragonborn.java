@@ -1,9 +1,11 @@
 package charactergen.races;
 
+import charactergen.Attributes;
+
 public class Dragonborn extends BaseRace {
 
     public Dragonborn() {
-        super(0, 5);
+        setBonuses(Attributes.STR, Attributes.CHA);
     }
 
     /**

@@ -19,7 +19,7 @@ public class Attributes {
     private int[] _attributes = {0, 0, 0, 0, 0, 0};
 
     public void setAll(int[] a) {
-        for(int i = 0; i < 6; i++){
+        for (int i = 0; i < 6; i++) {
             setAttribute(i, a[i]);
         }
     }
@@ -42,10 +42,28 @@ public class Attributes {
 
     public int getMod(int index) {
         int value = _attributes[index] - 10;
-        if( value < 0){
-            return (int)Math.ceil(value/2);
+        if (value < 0) {
+            return (int) Math.ceil(value / 2);
         } else {
-            return (int)Math.floor(value/2);
+            return (int) Math.floor(value / 2);
         }
+    }
+
+    public static String getAttributeName(int index) {
+        switch (index) {
+            case 0:
+                return "STR";
+            case 1:
+                return "DEX";
+            case 2:
+                return "CON";
+            case 3:
+                return "INT";
+            case 4:
+                return "WIS";
+            case 5:
+                return "CHA";
+        }
+        return "BAD";
     }
 }

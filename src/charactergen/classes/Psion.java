@@ -1,15 +1,13 @@
 package charactergen.classes;
 
+import java.util.Arrays;
+
 public class Psion extends BaseClass {
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getRanks() {
-        int[] local = {5, 4, 3, 0, 2, 1};
-        return local;
+    public Psion() {
+        setRanks(Arrays.asList(5, 4, 3, 0, 2, 1));
+        setHealth(12);
+        _levelHealth = 4;
     }
 
     /**
@@ -19,16 +17,6 @@ public class Psion extends BaseClass {
     @Override
     public String getName() {
         return "Psion";
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public int[] getPreferred() {
-        int[] local = {3, 5, 4};
-        return local;
     }
 
     /**

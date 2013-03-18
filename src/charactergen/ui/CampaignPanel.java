@@ -35,7 +35,7 @@ public class CampaignPanel extends JPanel {
         _infoPane = new JEditorPane();
         _copyButton = new JButton("Copy to Clipboard");
 
-        Dimension d = new Dimension(100, 200);
+        Dimension d = new Dimension(200, 200);
         _infoPane.setEditable(false);
         _infoPane.setMinimumSize(d);
     }
@@ -56,7 +56,7 @@ public class CampaignPanel extends JPanel {
                 .addComponent(_copyButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
     }
 
-    private void attachListeners(){
+    private void attachListeners() {
         _character.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,13 +64,12 @@ public class CampaignPanel extends JPanel {
             }
         });
 
-        _copyButton.addActionListener(new ActionListener(){
+        _copyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ClipboardCopy cc = new ClipboardCopy();
                 cc.toClipboard(_infoPane.getText());
             }
-
         });
     }
 }
