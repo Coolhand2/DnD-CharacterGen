@@ -4,6 +4,9 @@
  */
 package charactergen;
 
+import charactergen.ui.MainInterface;
+import java.awt.EventQueue;
+
 /**
  *
  * @author Mike
@@ -14,6 +17,11 @@ public class CharacterGen {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                MainInterface mainInterface = new MainInterface(new Character());
+            }
+        });
     }
 }
