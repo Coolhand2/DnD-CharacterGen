@@ -9,6 +9,8 @@ import java.awt.Container;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -22,21 +24,24 @@ public class MainInterface extends JFrame {
         _character = c;
         setupFrame();
         loadFrame();
-        setVisible(true);
+        pack();
     }
 
     private void setupFrame() {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Attribute Generator");
+        setTitle("Character Generator");
     }
 
     private void loadFrame() {
 
         Container mainPanel = getContentPane();
-        JPanel choicePanel = new ChoicePanel(_character);
-        JPanel generatePanel = new GeneratePanel(_character);
-        JPanel resultPanel = new ResultPanel(_character);
+        ChoicePanel choicePanel = new ChoicePanel(_character);
+        GeneratePanel generatePanel = new GeneratePanel(_character);
+        ResultPanel resultPanel = new ResultPanel(_character);
+        CampaignPanel campaignPanel = new CampaignPanel(_character);
 
+        JSeparator horizontalSeparator = new JSeparator(JSeparator.HORIZONTAL);
+        JSeparator verticalSeparator = new JSeparator(JSeparator.VERTICAL);
 
         GroupLayout mainLayout = new GroupLayout(mainPanel);
         mainPanel.setLayout(mainLayout);
@@ -44,17 +49,28 @@ public class MainInterface extends JFrame {
         mainLayout.setAutoCreateContainerGaps(true);
 
         mainLayout.setVerticalGroup(
+                mainLayout.createParallelGroup()
+                .addGroup(
                 mainLayout.createSequentialGroup()
                 .addComponent(choicePanel)
                 .addComponent(generatePanel)
-                .addComponent(resultPanel));
+                .addComponent(horizontalSeparator)
+                .addComponent(campaignPanel))
+                .addComponent(verticalSeparator)
+                .addGroup(
+                mainLayout.createParallelGroup()
+                .addComponent(resultPanel)));
         mainLayout.setHorizontalGroup(
+                mainLayout.createSequentialGroup()
+                .addGroup(
                 mainLayout.createParallelGroup()
                 .addComponent(choicePanel)
                 .addComponent(generatePanel)
-                .addComponent(resultPanel));
-
-        pack();
-
+                .addComponent(horizontalSeparator)
+                .addComponent(campaignPanel))
+                .addComponent(verticalSeparator)
+                .addGroup(
+                mainLayout.createParallelGroup()
+                .addComponent(resultPanel)));
     }
 }

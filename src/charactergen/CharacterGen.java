@@ -21,6 +21,7 @@ public class CharacterGen {
             @Override
             public void run() {
                 MainInterface mainInterface = new MainInterface(new Character());
+                mainInterface.setVisible(true);
             }
         });
     }

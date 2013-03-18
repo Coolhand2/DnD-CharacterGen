@@ -23,8 +23,9 @@ public class Character {
     private BaseGenerator _generator;
     private BaseRace _race;
     private BaseClass _class;
-    private int[] _attributes;
+    private Attributes _attributes;
     private int _level;
+    private int _health;
     private Vector<ClassMap> _classMap;
     public static final BaseClass[] CLASSES = {
         new Ardent(), new Avenger(), new Barbarian(), new Bard(),
@@ -48,6 +49,8 @@ public class Character {
 
     public Character() {
         _level = 1;
+        _health = 0;
+        _attributes = new Attributes();
         _generator = new NormalSpread();
         _race = new Deva();
         _class = new Ardent();
@@ -100,6 +103,7 @@ public class Character {
         for (int i = 0; i < 6; i++) {
             sums[i] += attributes[ranks[i]] + bonuses[i];
         }
+        _health = sums[2];
         for (int i = 0; i < _level; i++) {
             switch (i) {
                 case 4:
@@ -118,13 +122,22 @@ public class Character {
                     }
                     break;
             }
+            _health += ((sums[2] - 10)/2);
         }
-        _attributes = sums;
+        _attributes.setAll(sums);
         notifyListeners();
     }
 
-    public int[] getAttributes() {
+    public Attributes getAttributes() {
         return _attributes;
+    }
+
+    public int getHealth() {
+        return _health;
+    }
+
+    public int getLevel() {
+        return _level;
     }
 
     public void addActionListener(ActionListener al) {
@@ -163,5 +176,17 @@ public class Character {
             }
         }
         return bc;
+    }
+
+    @Override
+    public String toString(){
+        String description = "";
+        description += _class.getName() + " " + _race.getName();
+        description += " level " + _level + " health " + _health;
+        description += " bloodied " + _health/2 + " healing surge " + _health/4;
+        description += " melee " + ((_level/2) + _attributes.getMod(Attributes.STR));
+        description += " ranged " + ((_level/2) + _attributes.getMod(Attributes.DEX));
+
+        return description;
     }
 }

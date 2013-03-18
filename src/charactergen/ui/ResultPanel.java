@@ -4,45 +4,54 @@
  */
 package charactergen.ui;
 
-
+import charactergen.Attributes;
 import charactergen.Character;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+
 /**
  *
  * @author Mike
  */
-public class ResultPanel extends JPanel{
+public class ResultPanel extends JPanel {
+
     private Character _character;
     private JLabel _strengthValue, _dexterityValue, _constitutionValue, _intelligenceValue, _wisdomValue, _charismaValue;
     private JLabel _strengthMod, _dexterityMod, _constitutionMod, _intelligenceMod, _wisdomMod, _charismaMod;
-    public ResultPanel(Character c){
+    private JLabel _healthValue, _levelValue;
+
+    public ResultPanel(Character c) {
         _character = c;
         loadPanel();
         setupPanel();
         attachListeners();
     }
 
-    private void loadPanel(){
+    private void loadPanel() {
         _strengthValue = new JLabel("10");
         _dexterityValue = new JLabel("10");
         _constitutionValue = new JLabel("10");
         _intelligenceValue = new JLabel("10");
         _wisdomValue = new JLabel("10");
         _charismaValue = new JLabel("10");
+
         _strengthMod = new JLabel("+0");
         _dexterityMod = new JLabel("+0");
         _constitutionMod = new JLabel("+0");
         _intelligenceMod = new JLabel("+0");
         _wisdomMod = new JLabel("+0");
         _charismaMod = new JLabel("+0");
+
+        _healthValue = new JLabel("0");
+        _levelValue = new JLabel("1");
     }
 
-    private void setupPanel(){
+    private void setupPanel() {
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setAutoCreateGaps(true);
@@ -58,108 +67,140 @@ public class ResultPanel extends JPanel{
         JLabel attributeValue = new JLabel("Value");
         JLabel attributeMod = new JLabel("Modifier");
 
+        JLabel levelLabel = new JLabel("Level: ");
+        JLabel healthLabel = new JLabel("Health: ");
+
         JSeparator separatorOne = new JSeparator(JSeparator.HORIZONTAL);
         JSeparator separatorTwo = new JSeparator(JSeparator.HORIZONTAL);
         JSeparator separatorThree = new JSeparator(JSeparator.HORIZONTAL);
+        JSeparator separatorFour = new JSeparator(JSeparator.HORIZONTAL);
 
         layout.setVerticalGroup(
-            layout.createSequentialGroup()
+                layout.createSequentialGroup()
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(attributeTitle)
-                        .addComponent(attributeValue)
-                        .addComponent(attributeMod))
+                layout.createParallelGroup()
+                .addComponent(attributeTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(attributeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(attributeMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(separatorOne, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(separatorOne)
-                        .addComponent(separatorTwo)
-                        .addComponent(separatorThree))
+                layout.createParallelGroup()
+                .addComponent(strengthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_strengthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_strengthMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(strengthLabel)
-                        .addComponent(_strengthValue)
-                        .addComponent(_strengthMod))
+                layout.createParallelGroup()
+                .addComponent(dexterityLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_dexterityValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_dexterityMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(dexterityLabel)
-                        .addComponent(_dexterityValue)
-                        .addComponent(_dexterityMod))
+                layout.createParallelGroup()
+                .addComponent(constitutionLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_constitutionValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_constitutionMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(constitutionLabel)
-                        .addComponent(_constitutionValue)
-                        .addComponent(_constitutionMod))
+                layout.createParallelGroup()
+                .addComponent(intelligenceLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_intelligenceValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_intelligenceMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(intelligenceLabel)
-                        .addComponent(_intelligenceValue)
-                        .addComponent(_intelligenceMod))
+                layout.createParallelGroup()
+                .addComponent(wisdomLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_wisdomValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_wisdomMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(wisdomLabel)
-                        .addComponent(_wisdomValue)
-                        .addComponent(_wisdomMod))
+                layout.createParallelGroup()
+                .addComponent(charismaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_charismaValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_charismaMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(separatorFour, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(charismaLabel)
-                        .addComponent(_charismaValue)
-                        .addComponent(_charismaMod))
-        );
+                layout.createParallelGroup()
+                .addComponent(levelLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_levelValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createParallelGroup()
+                .addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
         layout.setHorizontalGroup(
-            layout.createSequentialGroup()
+                layout.createParallelGroup()
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(attributeTitle)
-                        .addComponent(separatorOne)
-                        .addComponent(strengthLabel)
-                        .addComponent(dexterityLabel)
-                        .addComponent(constitutionLabel)
-                        .addComponent(intelligenceLabel)
-                        .addComponent(wisdomLabel)
-                        .addComponent(charismaLabel))
+                layout.createSequentialGroup()
+                .addComponent(attributeTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(attributeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(attributeMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(separatorOne, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(attributeValue)
-                        .addComponent(separatorTwo)
-                        .addComponent(_strengthValue)
-                        .addComponent(_dexterityValue)
-                        .addComponent(_constitutionValue)
-                        .addComponent(_intelligenceValue)
-                        .addComponent(_wisdomValue)
-                        .addComponent(_charismaValue))
+                layout.createSequentialGroup()
+                .addComponent(strengthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_strengthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_strengthMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(
-                    layout.createParallelGroup()
-                        .addComponent(attributeMod)
-                        .addComponent(separatorThree)
-                        .addComponent(_strengthMod)
-                        .addComponent(_dexterityMod)
-                        .addComponent(_constitutionMod)
-                        .addComponent(_intelligenceMod)
-                        .addComponent(_wisdomMod)
-                        .addComponent(_charismaMod))
-        );}
-    private void attachListeners(){
-        _character.addActionListener(new ActionListener(){
+                layout.createSequentialGroup()
+                .addComponent(dexterityLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_dexterityValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_dexterityMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(constitutionLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_constitutionValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_constitutionMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(intelligenceLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_intelligenceValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_intelligenceMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(wisdomLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_wisdomValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_wisdomMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(charismaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_charismaValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_charismaMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(separatorFour, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(levelLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_levelValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+    }
+
+    private void attachListeners() {
+        _character.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt){
-                updateValues(_character.getAttributes());
+            public void actionPerformed(ActionEvent evt) {
+                updateValues();
             }
         });
     }
 
-    private void updateValues(int[] attributes){
-        _strengthValue.setText(String.valueOf(attributes[0]));
-        _dexterityValue.setText(String.valueOf(attributes[1]));
-        _constitutionValue.setText(String.valueOf(attributes[2]));
-        _intelligenceValue.setText(String.valueOf(attributes[3]));
-        _wisdomValue.setText(String.valueOf(attributes[4]));
-        _charismaValue.setText(String.valueOf(attributes[5]));
+    private void updateValues() {
+        Attributes attributes = _character.getAttributes();
+        int health = _character.getHealth();
+        int level = _character.getLevel();
 
-        _strengthMod.setText(String.valueOf((attributes[0]-10)/2));
-        _dexterityMod.setText(String.valueOf((attributes[1]-10)/2));
-        _constitutionMod.setText(String.valueOf((attributes[2]-10)/2));
-        _intelligenceMod.setText(String.valueOf((attributes[3]-10)/2));
-        _wisdomMod.setText(String.valueOf((attributes[4]-10)/2));
-        _charismaMod.setText(String.valueOf((attributes[5]-10)/2));
+        _strengthValue.setText(String.valueOf(attributes.get(Attributes.STR)));
+        _dexterityValue.setText(String.valueOf(attributes.get(Attributes.DEX)));
+        _constitutionValue.setText(String.valueOf(attributes.get(Attributes.CON)));
+        _intelligenceValue.setText(String.valueOf(attributes.get(Attributes.INT)));
+        _wisdomValue.setText(String.valueOf(attributes.get(Attributes.WIS)));
+        _charismaValue.setText(String.valueOf(attributes.get(Attributes.CHA)));
+
+        _strengthMod.setText(String.valueOf(attributes.getMod(Attributes.STR)));
+        _dexterityMod.setText(String.valueOf(attributes.getMod(Attributes.DEX)));
+        _constitutionMod.setText(String.valueOf(attributes.getMod(Attributes.CON)));
+        _intelligenceMod.setText(String.valueOf(attributes.getMod(Attributes.INT)));
+        _wisdomMod.setText(String.valueOf(attributes.getMod(Attributes.WIS)));
+        _charismaMod.setText(String.valueOf(attributes.getMod(Attributes.CHA)));
+
+        _healthValue.setText(String.valueOf(health));
+        _levelValue.setText(String.valueOf(level));
     }
 }

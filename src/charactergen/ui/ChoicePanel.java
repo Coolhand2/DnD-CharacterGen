@@ -4,8 +4,8 @@
  */
 package charactergen.ui;
 
-import charactergen.classes.BaseClass;
 import charactergen.Character;
+import charactergen.classes.BaseClass;
 import charactergen.generators.BaseGenerator;
 import charactergen.races.BaseRace;
 import java.awt.event.ActionEvent;
