@@ -26,4 +26,9 @@ public class Druid extends BaseClass {
     public String getRole() {
         return "Controller";
     }
+
+    @Override
+    public int getSurges() {
+        return 7;
+    }
 }

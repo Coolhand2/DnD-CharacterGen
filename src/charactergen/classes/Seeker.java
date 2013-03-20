@@ -26,4 +26,9 @@ public class Seeker extends BaseClass {
     public String getRole() {
         return "Controller";
     }
+
+    @Override
+    public int getSurges() {
+        return 7;
+    }
 }

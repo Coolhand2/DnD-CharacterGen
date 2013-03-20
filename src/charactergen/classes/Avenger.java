@@ -26,4 +26,9 @@ public class Avenger extends BaseClass {
     public String getRole() {
         return "Striker";
     }
+
+    @Override
+    public int getSurges() {
+        return 7;
+    }
 }

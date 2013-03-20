@@ -27,4 +27,9 @@ public class Psion extends BaseClass {
     public String getRole() {
         return "Controller";
     }
+
+    @Override
+    public int getSurges() {
+        return 6;
+    }
 }

@@ -23,7 +23,7 @@ public class ResultPanel extends JPanel {
     private Character _character;
     private JLabel _strengthValue, _dexterityValue, _constitutionValue, _intelligenceValue, _wisdomValue, _charismaValue;
     private JLabel _strengthMod, _dexterityMod, _constitutionMod, _intelligenceMod, _wisdomMod, _charismaMod;
-    private JLabel _healthValue, _levelValue;
+    private JLabel _healthValue, _levelValue, _fortitudeValue, _reflexValue, _willValue;
 
     public ResultPanel(Character c) {
         _character = c;
@@ -49,6 +49,9 @@ public class ResultPanel extends JPanel {
 
         _healthValue = new JLabel("0");
         _levelValue = new JLabel("1");
+        _fortitudeValue = new JLabel("0");
+        _reflexValue = new JLabel("0");
+        _willValue = new JLabel("0");
     }
 
     private void setupPanel() {
@@ -69,11 +72,13 @@ public class ResultPanel extends JPanel {
 
         JLabel levelLabel = new JLabel("Level: ");
         JLabel healthLabel = new JLabel("Health: ");
+        JLabel fortitudeLabel = new JLabel("Fortitude: ");
+        JLabel reflexLabel = new JLabel("Reflex: ");
+        JLabel willLabel = new JLabel("Will: ");
 
-        JSeparator separatorOne = new JSeparator(JSeparator.HORIZONTAL);
+        JSeparator separator = new JSeparator(JSeparator.HORIZONTAL);
         JSeparator separatorTwo = new JSeparator(JSeparator.HORIZONTAL);
         JSeparator separatorThree = new JSeparator(JSeparator.HORIZONTAL);
-        JSeparator separatorFour = new JSeparator(JSeparator.HORIZONTAL);
 
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
@@ -82,7 +87,7 @@ public class ResultPanel extends JPanel {
                 .addComponent(attributeTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(attributeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(attributeMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addComponent(separatorOne, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(separator, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
                 layout.createParallelGroup()
                 .addComponent(strengthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,7 +118,7 @@ public class ResultPanel extends JPanel {
                 .addComponent(charismaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(_charismaValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(_charismaMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addComponent(separatorFour, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(separatorTwo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
                 layout.createParallelGroup()
                 .addComponent(levelLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -121,7 +126,20 @@ public class ResultPanel extends JPanel {
                 .addGroup(
                 layout.createParallelGroup()
                 .addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(separatorThree, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(
+                layout.createParallelGroup()
+                .addComponent(fortitudeLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_fortitudeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createParallelGroup()
+                .addComponent(reflexLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_reflexValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createParallelGroup()
+                .addComponent(willLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_willValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         layout.setHorizontalGroup(
                 layout.createParallelGroup()
                 .addGroup(
@@ -129,7 +147,7 @@ public class ResultPanel extends JPanel {
                 .addComponent(attributeTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(attributeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(attributeMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addComponent(separatorOne, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(separator, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
                 layout.createSequentialGroup()
                 .addComponent(strengthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -160,7 +178,7 @@ public class ResultPanel extends JPanel {
                 .addComponent(charismaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(_charismaValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(_charismaMod, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addComponent(separatorFour, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(separatorTwo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
                 layout.createSequentialGroup()
                 .addComponent(levelLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -168,7 +186,20 @@ public class ResultPanel extends JPanel {
                 .addGroup(
                 layout.createSequentialGroup()
                 .addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(separatorThree, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(fortitudeLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_fortitudeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(reflexLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_reflexValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(willLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_willValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
     }
 
     private void attachListeners() {
@@ -182,8 +213,6 @@ public class ResultPanel extends JPanel {
 
     private void updateValues() {
         Attributes attributes = _character.getAttributes();
-        int health = _character.getHealth();
-        int level = _character.getLevel();
 
         _strengthValue.setText(String.valueOf(attributes.get(Attributes.STR)));
         _dexterityValue.setText(String.valueOf(attributes.get(Attributes.DEX)));
@@ -199,7 +228,14 @@ public class ResultPanel extends JPanel {
         _wisdomMod.setText(String.valueOf(attributes.getMod(Attributes.WIS)));
         _charismaMod.setText(String.valueOf(attributes.getMod(Attributes.CHA)));
 
-        _healthValue.setText(String.valueOf(health));
-        _levelValue.setText(String.valueOf(level));
+        String health = String.valueOf(_character.getMaxHealth());
+        health += "/" + String.valueOf(_character.getBloodied());
+        health += "/" + String.valueOf(_character.getSurgeValue());
+        health += " (" + String.valueOf(_character.getSurgeAmount()) + "/day)";
+        _healthValue.setText(health);
+        _levelValue.setText(String.valueOf(_character.getLevel()));
+        _fortitudeValue.setText(String.valueOf(_character.getFortitude()));
+        _reflexValue.setText(String.valueOf(_character.getReflex()));
+        _willValue.setText(String.valueOf(_character.getWill()));
     }
 }

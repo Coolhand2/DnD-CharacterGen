@@ -12,7 +12,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
-import support.ClipboardCopy;
+import charactergen.support.ClipboardCopy;
 
 /**
  *

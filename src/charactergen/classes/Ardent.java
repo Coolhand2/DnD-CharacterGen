@@ -26,4 +26,9 @@ public class Ardent extends BaseClass {
     public String getRole() {
         return "Leader";
     }
+
+    @Override
+    public int getSurges() {
+        return 7;
+    }
 }

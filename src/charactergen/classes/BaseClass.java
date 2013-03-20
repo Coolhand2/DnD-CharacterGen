@@ -11,9 +11,9 @@ public abstract class BaseClass {
     private int _baseHealth = 0;
     protected int _levelHealth = 0;
 
-    protected void setHealth(int i){
+    protected void setHealth(int i) {
         _baseHealth = i;
-        _levelHealth = (i/2) - 1;
+        _levelHealth = (i / 2) - 1;
     }
 
     public Vector<Integer> getRanks() {
@@ -38,6 +38,8 @@ public abstract class BaseClass {
     public abstract String getName();
 
     public abstract String getRole();
+
+    public abstract int getSurges();
 
     public int getBaseHealth() {
         return _baseHealth;

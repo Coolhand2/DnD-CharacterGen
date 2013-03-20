@@ -26,4 +26,9 @@ public class Bard extends BaseClass {
     public String getRole() {
         return "Leader";
     }
+
+    @Override
+    public int getSurges() {
+        return 5;
+    }
 }

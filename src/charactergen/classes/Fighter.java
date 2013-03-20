@@ -26,4 +26,9 @@ public class Fighter extends BaseClass {
     public String getRole() {
         return "Defender";
     }
+
+    @Override
+    public int getSurges() {
+        return 9;
+    }
 }

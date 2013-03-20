@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package support;
+package charactergen.support;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;

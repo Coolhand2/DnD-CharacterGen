@@ -3,14 +3,18 @@
 * ~~Flexible Bonus System (Done)~~
 * ~~Abstract Base Classes (Done)~~
 * ~~Health Calculations (Done)~~
-* Defense Calculations
-* Skills (with User Select Support)
-* Weapons (with User Select Support)
-* Armor (with User Select Support)
-* Feats (with User Select Support)
+* ~~Defense Calculations (Done)~~
+* Skills
+* Weapons
+* Armor
+* Feats
 * Data Definition Files (Using XPath)
 * Point-Buy Attribute Generator
-* User-Specified Attribute Preferences (instead of Class-Specified Attribute Preferences)
+* User-Specified Preferences (instead of Class-Specified or Race-Specified Preferences)
+* Paragon Paths and Epic Destinies
+* Skill Powers
+* Class Powers
+* Racial Powers
 
 ### User Specified Attribute Preferences
 ```java

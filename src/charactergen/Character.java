@@ -27,12 +27,14 @@ public class Character {
     private Attributes _attributes;
     private int _level;
     private int _health;
+    private int _surges;
     private Vector<ClassMap> _classMap;
     private BaseSetting _setting;
 
     public Character() {
         _level = 1;
         _health = 0;
+        _surges = 0;
         _attributes = new Attributes();
         _generator = new NormalSpread();
         _race = new Deva();
@@ -101,11 +103,11 @@ public class Character {
                 case 18:
                 case 24:
                 case 28:
+                    sums[preferred.elementAt(0)]++;
+                    sums[preferred.elementAt(1)]++;
                     if( preferred.contains(Attributes.CON)){
                         _health++;
                     }
-                    sums[preferred.elementAt(0)]++;
-                    sums[preferred.elementAt(1)]++;
                     break;
                 case 11:
                 case 21:
@@ -124,12 +126,44 @@ public class Character {
         return _attributes;
     }
 
-    public int getHealth() {
+    public int getMaxHealth() {
         return _health;
+    }
+
+    public int getBloodied(){
+        return (int)getMaxHealth()/2;
+    }
+
+    public int getSurgeValue(){
+        return (int)getMaxHealth()/4;
+    }
+
+    public int getSurgeAmount(){
+        return _class.getSurges() + _attributes.getMod(Attributes.CON);
     }
 
     public int getLevel() {
         return _level;
+    }
+
+    public int getMeleeAttack(){
+        return _attributes.getMod(Attributes.STR) + (int)Math.floor(_level/2);
+    }
+
+    public int getRangedAttack(){
+        return _attributes.getMod(Attributes.DEX) + (int)Math.floor(_level/2);
+    }
+
+    public int getFortitude(){
+        return Math.max(_attributes.getMod(Attributes.STR), _attributes.getMod(Attributes.CON)) + (int)Math.floor(_level/2);
+    }
+
+    public int getReflex(){
+        return Math.max(_attributes.getMod(Attributes.DEX), _attributes.getMod(Attributes.INT)) + (int)Math.floor(_level/2);
+    }
+
+    public int getWill(){
+        return Math.max(_attributes.getMod(Attributes.WIS), _attributes.getMod(Attributes.CHA)) + (int)Math.floor(_level/2);
     }
 
     public void addActionListener(ActionListener al) {
@@ -174,10 +208,13 @@ public class Character {
     public String toString() {
         String description = "";
         description += _class.getName() + " " + _race.getName();
-        description += " level(" + _level + ") health(" + _health + ")";
-        description += " bloodied(" + _health / 2 + ") healing surge(" + _health / 4 + ")";
-        description += " melee(" + ((_level / 2) + _attributes.getMod(Attributes.STR)) + ")";
-        description += " ranged(" + ((_level / 2) + _attributes.getMod(Attributes.DEX)) + ")";
+        description += " level(" + getLevel() + ") health(" + getMaxHealth() + ")";
+        description += " bloodied(" + getBloodied() + ") healing surge(" + getSurgeValue() + ")";
+        description += " melee(" + getMeleeAttack() + ")";
+        description += " ranged(" + getRangedAttack() + ")";
+        description += " fortitude(" + getFortitude() + ")";
+        description += " reflex(" + getReflex() + ")";
+        description += " will(" + getWill() + ")";
 
         return description;
     }
