@@ -1,8 +1,8 @@
 ## Todo List
-* Settings (Done)
-* Flexible Bonus System (Done)
-* Abstract Base Classes (Done)
-* Health Calculations (Done)
+* ~~Settings (Done)~~
+* ~~Flexible Bonus System (Done)~~
+* ~~Abstract Base Classes (Done)~~
+* ~~Health Calculations (Done)~~
 * Defense Calculations
 * Skills (with User Select Support)
 * Weapons (with User Select Support)
