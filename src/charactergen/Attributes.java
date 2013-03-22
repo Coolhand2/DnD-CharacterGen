@@ -66,4 +66,22 @@ public class Attributes {
         }
         return "BAD";
     }
+
+    public static int translate(String name){
+        switch(name){
+            case "STR":
+                return 0;
+            case "DEX":
+                return 1;
+            case "CON":
+                return 2;
+            case "INT":
+                return 3;
+            case "WIS":
+                return 4;
+            case "CHA":
+                return 5;
+        }
+        return 6;
+    }
 }

@@ -27,14 +27,12 @@ public class Character {
     private Attributes _attributes;
     private int _level;
     private int _health;
-    private int _surges;
     private Vector<ClassMap> _classMap;
     private BaseSetting _setting;
 
     public Character() {
         _level = 1;
         _health = 0;
-        _surges = 0;
         _attributes = new Attributes();
         _generator = new NormalSpread();
         _race = new Deva();

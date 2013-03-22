@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -40,6 +41,7 @@ public class ChoicePanel extends JPanel {
     private ActionListener _generatorListener;
     private JButton _classLock;
     private JButton _raceLock;
+    private JButton _preferenceSet;
     private boolean _classLocked;
     private boolean _raceLocked;
     private BaseSetting _setting;
@@ -77,6 +79,8 @@ public class ChoicePanel extends JPanel {
         _classBox = new JComboBox(classes);
         _raceBox = new JComboBox(races);
         _levelSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
+        _classLock = new JButton("Lock");
+        _raceLock = new JButton("Lock");
     }
 
     private void setupPanel() {
@@ -93,9 +97,6 @@ public class ChoicePanel extends JPanel {
         JLabel levelLabel = new JLabel("Level: ");
 
         JLabel placeholder = new JLabel("");
-
-        _classLock = new JButton("Lock");
-        _raceLock = new JButton("Lock");
 
         layout.setVerticalGroup(
                 layout.createSequentialGroup()

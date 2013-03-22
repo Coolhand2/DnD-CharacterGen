@@ -24,7 +24,7 @@ public abstract class BaseClass {
         return _preferred;
     }
 
-    protected void setRanks(List<Integer> ranks) {
+    public void setRanks(List<Integer> ranks) {
         _ranks = new Vector<>(ranks);
         setPreferred();
     }

@@ -4,13 +4,13 @@
 * ~~Abstract Base Classes (Done)~~
 * ~~Health Calculations (Done)~~
 * ~~Defense Calculations (Done)~~
+* ~User-Specified Preferences (Done)~~
+* Data Definition Files (Using XPath)
 * Skills
 * Weapons
 * Armor
 * Feats
-* Data Definition Files (Using XPath)
 * Point-Buy Attribute Generator
-* User-Specified Preferences (instead of Class-Specified or Race-Specified Preferences)
 * Paragon Paths and Epic Destinies
 * Skill Powers
 * Class Powers
