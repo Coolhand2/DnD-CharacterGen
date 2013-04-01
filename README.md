@@ -4,7 +4,7 @@
 * ~~Abstract Base Classes (Done)~~
 * ~~Health Calculations (Done)~~
 * ~~Defense Calculations (Done)~~
-* ~User-Specified Preferences (Done)~~
+* ~~User-Specified Preferences (Done)~~
 * Data Definition Files (Using XPath)
 * Skills
 * Weapons
@@ -15,13 +15,3 @@
 * Skill Powers
 * Class Powers
 * Racial Powers
-
-### User Specified Attribute Preferences
-```java
-String[] array = preferences.split(",");
-Vector<Integer> values = new Vector<Integer>();
-for(String value : array){
-    values.add(Integer.valueOf(value));
-}
-_class.setPreferred(values);
-```
