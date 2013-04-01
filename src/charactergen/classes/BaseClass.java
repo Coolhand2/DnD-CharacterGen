@@ -8,6 +8,7 @@ public abstract class BaseClass {
 
     private Vector<Integer> _ranks = new Vector<>();
     private Vector<Integer> _preferred = new Vector<>();
+    private Vector<Integer> _default = new Vector<>();
     private int _baseHealth = 0;
     protected int _levelHealth = 0;
 
@@ -20,11 +21,21 @@ public abstract class BaseClass {
         return _ranks;
     }
 
+    public Vector<Integer> getDefaultRanks() {
+        return _default;
+    }
+
     public Vector<Integer> getPreferred() {
         return _preferred;
     }
 
     public void setRanks(List<Integer> ranks) {
+        _ranks = new Vector<>(ranks);
+        _default = new Vector<>(ranks);
+        setPreferred();
+    }
+
+    public void resetRanks(List<Integer> ranks){
         _ranks = new Vector<>(ranks);
         setPreferred();
     }

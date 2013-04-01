@@ -31,19 +31,15 @@ import javax.swing.SpinnerNumberModel;
 public class AttributePreferences extends JDialog {
 
     private Character _character;
-    private JLabel _organization;
-    private JButton _save, _str, _dex, _con, _int, _wis, _cha;
-    private boolean _strPlaced, _dexPlaced, _conPlaced, _intPlaced, _wisPlaced, _chaPlaced;
+    private JLabel[] _ranks = {new JLabel(""), new JLabel(""), new JLabel(""), new JLabel(""), new JLabel(""), new JLabel("")};
+    private JButton _save, _clear, _reset;
+    private JButton[] _attributes ={new JButton("STR"), new JButton("DEX"), new JButton("CON"), new JButton("INT"), new JButton("WIS"), new JButton("CHA")};
+    private boolean[] _placed = {true, true, true, true, true, true};
+    private int _count;
 
     public AttributePreferences(Character c) {
         _character = c;
-
-        _strPlaced = true;
-        _dexPlaced = true;
-        _conPlaced = true;
-        _intPlaced = true;
-        _wisPlaced = true;
-        _chaPlaced = true;
+        _count = 6;
 
         loadDialog();
         setupDialog();
@@ -55,33 +51,37 @@ public class AttributePreferences extends JDialog {
         setLayout(layout);
 
         _save = new JButton("Save!");
+        _clear = new JButton("Clear");
+        _reset = new JButton("Reset");
 
-        _str = new JButton("STR");
-        _dex = new JButton("DEX");
-        _con = new JButton("CON");
-        _int = new JButton("INT");
-        _wis = new JButton("WIS");
-        _cha = new JButton("CHA");
-
-        _organization = new JLabel();
         Vector<Integer> ranks = _character.getClassType().getRanks();
-        String attributes = "";
-        for(Integer r : ranks){
-            attributes += Attributes.getAttributeName(r) + " ";
+        int i = 0;
+        for(JLabel l : _ranks){
+            l.setText(Attributes.getAttributeName(ranks.get(i)));
+            i++;
         }
-        _organization.setText(attributes);
     }
 
     private void setupDialog() {
-        addToPanel(new JLabel("Order: "), 1, 1, 2, 1);
-        addToPanel(_organization, 3, 1, 3, 1);
-        addToPanel(_str, 1, 2, 1, 1);
-        addToPanel(_dex, 2, 2, 1, 1);
-        addToPanel(_con, 3, 2, 1, 1);
-        addToPanel(_int, 4, 2, 1, 1);
-        addToPanel(_wis, 5, 2, 1, 1);
-        addToPanel(_cha, 6, 2, 1, 1);
-        addToPanel(_save, 1, 3, 6, 1);
+        addToPanel(new JLabel("First"), 1, 1, 1, 1);
+        addToPanel(new JLabel("Second"), 2, 1, 1, 1);
+        addToPanel(new JLabel("Third"), 3, 1, 1, 1);
+        addToPanel(new JLabel("Fourth"), 4, 1, 1, 1);
+        addToPanel(new JLabel("Fifth"), 5, 1, 1, 1);
+        addToPanel(new JLabel("Sixth"), 6, 1, 1, 1);
+        int i = 1;
+        for(JLabel l : _ranks){
+            addToPanel(l, i, 2, 1, 1);
+            i++;
+        }
+        i = 1;
+        for(JButton b : _attributes){
+            addToPanel(b, i, 3, 1, 1);
+            i++;
+        }
+        addToPanel(_save, 1, 4, 2, 1);
+        addToPanel(_clear, 3, 4, 2, 1);
+        addToPanel(_reset, 5, 4, 2, 1);
 
         pack();
         setVisible(true);
@@ -94,6 +94,27 @@ public class AttributePreferences extends JDialog {
                 saveStats();
             }
         });
+        _clear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearStats();
+            }
+        });
+        _reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetStats();
+            }
+        });
+        for(JButton b : _attributes){
+            final String name = b.getText();
+            b.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    toggleAttribute(name);
+                }
+            });
+        }
     }
 
     private void addToPanel(Component c, int x, int y, int w, int h) {
@@ -108,17 +129,66 @@ public class AttributePreferences extends JDialog {
     }
 
     private void saveStats() {
-        String[] array = _organization.getText().split(" ");
-        int[] places = {0, 0, 0, 0, 0, 0};
-        Vector<Integer> values = new Vector<>();
-        for(int i = 0; i < 6; i++){
-            int attribute = Attributes.translate(array[i]);
-            places[attribute] = i;
+        Vector<Integer> preferences = new Vector<>();
+        for(JLabel l : _ranks){
+            preferences.add(Attributes.translate(l.getText()));
         }
-        for(int i : places){
-            values.add(i);
+        _character.getClassType().resetRanks(preferences);
+        setVisible(false);
+    }
+
+    private void clearStats(){
+        for(JLabel l : _ranks){
+            l.setText("");
         }
-        BaseClass c = _character.getClassType();
-        c.setRanks(values);
+        boolean[] local = {false, false, false, false, false, false};
+        _placed = local;
+        _count = 0;
+    }
+
+    private void resetStats(){
+        Vector<Integer> preferences = _character.getClassType().getDefaultRanks();
+        int i = 0;
+        for(JLabel l : _ranks){
+            l.setText(Attributes.getAttributeName(preferences.get(i)));
+            i++;
+        }
+        boolean[] local = {true, true, true, true, true, true};
+        _placed = local;
+        _count = 6;
+    }
+
+    private void toggleAttribute(String attribute){
+        int value = Attributes.translate(attribute);
+        if(_placed[value]){
+            removeAttribute(attribute);
+            _count--;
+        } else {
+            addAttribute(attribute);
+            _count++;
+        }
+        _placed[value] = !_placed[value];
+    }
+    private void addAttribute(String attribute){
+        int value = Attributes.translate(attribute);
+        _ranks[_count].setText(attribute);
+    }
+
+    private void removeAttribute(String attribute){
+        int i = 0;
+        for(JLabel l : _ranks){
+            if( l.getText().equals(attribute) ){
+                l.setText("");
+                shrink(i);
+            }
+            i++;
+        }
+    }
+
+    private void shrink(int i){
+        for(; i < 5; i++){
+            _ranks[i].setText(_ranks[i+1].getText());
+            _ranks[i+1].setText("");
+        }
     }
 }
