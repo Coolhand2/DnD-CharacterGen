@@ -9,7 +9,6 @@ import charactergen.Character;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -23,7 +22,7 @@ public class ResultPanel extends JPanel {
     private Character _character;
     private JLabel _strengthValue, _dexterityValue, _constitutionValue, _intelligenceValue, _wisdomValue, _charismaValue;
     private JLabel _strengthMod, _dexterityMod, _constitutionMod, _intelligenceMod, _wisdomMod, _charismaMod;
-    private JLabel _healthValue, _levelValue, _fortitudeValue, _reflexValue, _willValue;
+    private JLabel _healthValue, _levelValue, _initiativeValue, _fortitudeValue, _reflexValue, _willValue;
 
     public ResultPanel(Character c) {
         _character = c;
@@ -49,6 +48,7 @@ public class ResultPanel extends JPanel {
 
         _healthValue = new JLabel("0");
         _levelValue = new JLabel("1");
+        _initiativeValue = new JLabel("0");
         _fortitudeValue = new JLabel("0");
         _reflexValue = new JLabel("0");
         _willValue = new JLabel("0");
@@ -72,6 +72,7 @@ public class ResultPanel extends JPanel {
 
         JLabel levelLabel = new JLabel("Level: ");
         JLabel healthLabel = new JLabel("Health: ");
+        JLabel initiativeLabel = new JLabel("Initiative: ");
         JLabel fortitudeLabel = new JLabel("Fortitude: ");
         JLabel reflexLabel = new JLabel("Reflex: ");
         JLabel willLabel = new JLabel("Will: ");
@@ -127,6 +128,10 @@ public class ResultPanel extends JPanel {
                 layout.createParallelGroup()
                 .addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createParallelGroup()
+                .addComponent(initiativeLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_initiativeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(separatorThree, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
                 layout.createParallelGroup()
@@ -187,6 +192,10 @@ public class ResultPanel extends JPanel {
                 layout.createSequentialGroup()
                 .addComponent(healthLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(_healthValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(
+                layout.createSequentialGroup()
+                .addComponent(initiativeLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_initiativeValue, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addComponent(separatorThree, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(
                 layout.createSequentialGroup()
@@ -205,13 +214,13 @@ public class ResultPanel extends JPanel {
     private void attachListeners() {
         _character.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(ActionEvent e) {
                 updateValues();
             }
         });
     }
 
-    private void updateValues() {
+    public void updateValues() {
         Attributes attributes = _character.getAttributes();
 
         _strengthValue.setText(String.valueOf(attributes.get(Attributes.STR)));
@@ -234,6 +243,7 @@ public class ResultPanel extends JPanel {
         health += " (" + String.valueOf(_character.getSurgeAmount()) + "/day)";
         _healthValue.setText(health);
         _levelValue.setText(String.valueOf(_character.getLevel()));
+        _initiativeValue.setText(String.valueOf(_character.getInitiative()));
         _fortitudeValue.setText(String.valueOf(_character.getFortitude()));
         _reflexValue.setText(String.valueOf(_character.getReflex()));
         _willValue.setText(String.valueOf(_character.getWill()));

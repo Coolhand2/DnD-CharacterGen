@@ -18,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
@@ -63,15 +62,15 @@ public class ChoicePanel extends JPanel {
             settings.add(bs.getName());
         }
         Vector<String> generators = new Vector<>();
-        for(BaseGenerator bg : _setting.getGenerators()){
+        for (BaseGenerator bg : _setting.getGenerators()) {
             generators.add(bg.getName());
         }
         Vector<String> classes = new Vector<>();
-        for(BaseClass bc : _setting.getClasses()){
+        for (BaseClass bc : _setting.getClasses()) {
             classes.add(bc.getName());
         }
         Vector<String> races = new Vector<>();
-        for(BaseRace br : _setting.getRaces()){
+        for (BaseRace br : _setting.getRaces()) {
             races.add(br.getName());
         }
         _settingsBox = new JComboBox(settings);

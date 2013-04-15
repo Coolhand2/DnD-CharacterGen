@@ -60,13 +60,14 @@ public class GeneratePanel extends JPanel {
 
     private void attachListeners() {
         _generate.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 _character.generateAttributes();
             }
         });
-
-        _attributeSet.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent evt) {
+        _attributeSet.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 new AttributePreferences(_character);
             }
         });

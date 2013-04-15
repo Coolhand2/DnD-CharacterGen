@@ -29,10 +29,12 @@ public class Character {
     private int _health;
     private Vector<ClassMap> _classMap;
     private BaseSetting _setting;
+    private int _initiative;
 
     public Character() {
         _level = 1;
         _health = 0;
+        _initiative = 0;
         _attributes = new Attributes();
         _generator = new NormalSpread();
         _race = new Deva();
@@ -77,6 +79,14 @@ public class Character {
 
     public void setLevel(int l) {
         _level = l;
+    }
+
+    public void setInitiativeBonus(int i){
+        _initiative += i;
+    }
+
+    public int getInitiative(){
+        return _initiative + (int)(_level/2) + _attributes.getMod(Attributes.DEX);
     }
 
     public void generateAttributes() {
